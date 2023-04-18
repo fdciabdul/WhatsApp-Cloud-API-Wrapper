@@ -62,6 +62,7 @@ class WebhookServer extends EventEmitter {
           const challenge = req.query['hub.challenge'];
     
           if (token === verificationToken) {
+            this.emit('verification', "Webhook verified");
             res.status(200).send(challenge);
           } else {
             res.sendStatus(403);
