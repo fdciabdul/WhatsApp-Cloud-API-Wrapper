@@ -7,7 +7,7 @@
   "devDependencies": {
     "jsdoc": "^4.0.2"
   },
-  "name": "whatsappcloudapi",
+  "name": "wacloudapi",
   "version": "1.0.1",
   "main": "index.js",
   "scripts": {
@@ -20,10 +20,7 @@
   "directories": {
     "doc": "docs"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/fdciabdul/WhatsApp-Cloud-API-Wrapper.git"
-  },
+  "repository": "git+https://github.com/fdciabdul/WhatsApp-Cloud-API-Wrapper.git",
   "keywords": [
     "whatsapp",
     "whatsapp",
