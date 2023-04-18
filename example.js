@@ -1,4 +1,4 @@
-const { Message, WAParser, WebhookServer } = require('whatsapp-cloud-api-wrapper');
+const { Message, WAParser, WebhookServer } = require('wacloudapi');
 
 // Replace these values with your own credentials
 const apiVersion = 'YOUR_API_VERSION';
