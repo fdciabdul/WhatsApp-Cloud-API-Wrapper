@@ -21,6 +21,7 @@
 -   Supports setting up webhook servers for receiving events
 -   Built-in support for ngrok
 -   Automatically handles authentication and access tokens
+-  Automatically identify the webhook type data like Notification or Message
 
 ## Installation
 
@@ -85,6 +86,33 @@ Start the webhook server:
 
 ```javascript
 webhookServer.start();
+```
+
+## Webhook Parser
+
+The `WAParser` class is used to parse incoming webhook data from the WhatsApp Business API.
+
+
+#### parseMessage()
+
+Returns the parsed message object depending on the type of message contained in the received webhook data.
+```javascript
+const parse = new WAParser(WebhookData);
+  // parse message
+const parsedMessage = parse.parseMessage();
+```
+## Notification Parser
+
+The `NotificationParser` class is used to parse incoming webhook data from the WhatsApp Business API.
+
+
+#### NotificationParser()
+
+Returns the parsed message object depending on the type of message contained in the received webhook data.
+```javascript
+const parse = new NotificationParser(WebhookData);
+  // parse message
+const parsedMessage = parse.parseNotification();
 ```
 
 ## Documentation

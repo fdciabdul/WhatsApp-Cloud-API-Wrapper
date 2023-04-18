@@ -1,4 +1,4 @@
-const { Message, WAParser, WebhookServer } = require('wacloudapi');
+const { Message, WAParser, WebhookServer } = require('./');
 
 // Replace these values with your own credentials
 const apiVersion = 'YOUR_API_VERSION';
@@ -29,6 +29,10 @@ const webhookServer = new WebhookServer(port, useNgrok, ngrokAuthToken);
 // Add a listener for incoming messages
 webhookServer.on('message', (message) => {
   console.log('Received message:', message);
+  const parse = new WAParser(message);
+  // parse message
+  const parsedMessage = parse.parseMessage();
+    console.log('Parsed message:', parsedMessage);
 });
 
 // Add a route for webhook verification
