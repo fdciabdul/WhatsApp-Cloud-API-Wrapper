@@ -34,7 +34,7 @@ class WhatsAppWebhookParser {
                                             senderName: value.contacts[0].profile.name,
                                             wa_id: value.contacts[0].wa_id,
                                             forwarded: SetType.context && SetType.context.forwarded ? true : false,
-                                            quoted: SetType.context ? true : false,
+                                            quoted: SetType.context ? SetType.context : false,
                                     };
                             }
                     }

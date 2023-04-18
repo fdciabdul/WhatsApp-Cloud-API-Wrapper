@@ -27,9 +27,9 @@ const ngrokAuthToken = ''; // Add your ngrok auth token if you're using ngrok
 const webhookServer = new WebhookServer(port, useNgrok, ngrokAuthToken);
 
 // Add a listener for incoming messages
-webhookServer.on('message', (message) => {
+webhookServer.on('message', (data) => {
   console.log('Received message:', message);
-  const parse = new WAParser(message);
+  const parse = new WAParser(data);
   // parse message
   const parsedMessage = parse.parseMessage();
     console.log('Parsed message:', parsedMessage);
