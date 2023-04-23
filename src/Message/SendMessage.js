@@ -263,7 +263,7 @@ class Message {
     }
 
     async  sendListMessage(recipientPhoneNumber, headerText, bodyText, footerText, buttonText, sectionData) {
-        const message = new Message(apiVersion, phoneNumberId, accessToken);
+        const url = `${this.baseUrl}`;
         const payload = {
             messaging_product: 'whatsapp',
             recipient_type: 'individual',
@@ -287,12 +287,12 @@ class Message {
                 },
             },
         };
-        const response = await message.APIRequest(message.baseUrl, payload);
+        const response = await this.APIRequest(url, payload);
         return response;
     }
 
     async  sendProductMessage(recipientPhoneNumber, catalogId, productRetailerId, bodyText = '', footerText = '') {
-        const message = new Message(apiVersion, phoneNumberId, accessToken);
+        const url = `${this.baseUrl}`;
         const payload = {
             messaging_product: 'whatsapp',
             recipient_type: 'individual',
@@ -312,7 +312,7 @@ class Message {
                 },
             },
         };
-        const response = await message.APIRequest(message.baseUrl, payload);
+        const response = await this.APIRequest(url, payload);
         return response;
     }
     
