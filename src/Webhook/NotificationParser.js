@@ -1,3 +1,9 @@
+/**
+ * Description : WhatsApp Notification Parser Main Class
+ * @fdciabdul : 2023-04-19
+ * @param {any} webhookData
+ * @returns {any}
+ */
 class NotificationParser {
     constructor(notificationData) {
             this.notificationData = notificationData;

@@ -1,3 +1,9 @@
+/**
+ * Description : WhatsApp Webhook Parser Main Class
+ * @fdciabdul : 2023-04-19
+ * @param {any} webhookData
+ * @returns {any}
+ */
 class WhatsAppWebhookParser {
     constructor(webhookData) {
             this.webhookData = webhookData;
@@ -305,7 +311,7 @@ class WhatsAppWebhookParser {
                     }
             }
 
-            return null;
+            return;
     }
 
 }

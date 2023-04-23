@@ -261,6 +261,62 @@ class Message {
             return null;
         }
     }
+
+    async  sendListMessage(recipientPhoneNumber, headerText, bodyText, footerText, buttonText, sectionData) {
+        const message = new Message(apiVersion, phoneNumberId, accessToken);
+        const payload = {
+            messaging_product: 'whatsapp',
+            recipient_type: 'individual',
+            to: recipientPhoneNumber,
+            type: 'interactive',
+            interactive: {
+                type: 'list',
+                header: {
+                    type: 'text',
+                    text: headerText,
+                },
+                body: {
+                    text: bodyText,
+                },
+                footer: {
+                    text: footerText,
+                },
+                action: {
+                    button: buttonText,
+                    sections: sectionData,
+                },
+            },
+        };
+        const response = await message.APIRequest(message.baseUrl, payload);
+        return response;
+    }
+
+    async  sendProductMessage(recipientPhoneNumber, catalogId, productRetailerId, bodyText = '', footerText = '') {
+        const message = new Message(apiVersion, phoneNumberId, accessToken);
+        const payload = {
+            messaging_product: 'whatsapp',
+            recipient_type: 'individual',
+            to: recipientPhoneNumber,
+            type: 'interactive',
+            interactive: {
+                type: 'product',
+                body: {
+                    text: bodyText,
+                },
+                footer: {
+                    text: footerText,
+                },
+                action: {
+                    catalog_id: catalogId,
+                    product_retailer_id: productRetailerId,
+                },
+            },
+        };
+        const response = await message.APIRequest(message.baseUrl, payload);
+        return response;
+    }
+    
+
 }
 
 module.exports = Message;
