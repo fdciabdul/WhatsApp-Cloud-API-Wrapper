@@ -1,29 +1,59 @@
-const axios = require('axios');
-const WACLOUDAPIBase = require('../Main');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Message/SendMessage.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Message/SendMessage.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const axios = require('axios');
+
 /**
  * Wrapper for Whatsapp Cloud API
  *  Source : https://www.postman.com/meta/workspace/whatsapp-business-platform/
  *  Docs : https://developers.facebook.com/docs/whatsapp/api/messages
  *  Wrapped by : fdciabdul
- * @param {string} version
- * @param {string} phoneNumberId
- * @param {string} accessToken
- * @return {Promise<Object>} The response data from the Facebook Graph API, or null if an error occurs.
+ * @param {any} version
+ * @param {any} phoneNumberId
+ * @param {any} accessToken
+ * @returns {any}
  */
-class Message extends WACLOUDAPIBase {
+class Message {
     constructor(version, phoneNumberId, accessToken) {
-        super(version, phoneNumberId, accessToken);
+        this.version = version;
+        this.phoneNumberId = phoneNumberId;
+        this.accessToken = accessToken;
+        this.baseUrl = `https://graph.facebook.com/${version}/${phoneNumberId}/messages`;
     }
 
     /**
      *  Request Facebook API
-     * @param {string} url - API URL
-     * @param {string} payload
-     * @return {Promise<Object>} The response data from the Facebook Graph API, or null if an error occurs.
+     * @param {any} url
+     * @param {any} payload
+     * @returns {Array}
      * @memberof Message
      */
-    static async APIRequest(url, payload) {
-
+    async APIRequest(url, payload) {
         try {
             const response = await axios.post(url, payload, {
                 headers: {
@@ -45,10 +75,10 @@ class Message extends WACLOUDAPIBase {
  * @param {string} recipientPhoneNumber - The recipient's phone number.
  * @param {string} messageContent - The content of the message.
  * @param {boolean} [previewUrl=false] - Whether to include a preview URL in the message.
- * @returns {Promise<Object>} A promise that resolves to the API response.
+ * @returns {Promise&lt;Object>} A promise that resolves to the API response.
  * @memberof Message
  */
-    static async sendTextMessage(recipientPhoneNumber, messageContent, previewUrl = false) {
+    async sendTextMessage(recipientPhoneNumber, messageContent, previewUrl = false) {
         const payload = {
             messaging_product: 'whatsapp',
             recipient_type: 'individual',
@@ -65,14 +95,14 @@ class Message extends WACLOUDAPIBase {
 
     /**
      * Send Reply to Text Message
-     * @param {string} recipientPhoneNumber
-     * @param {string} messageId
-     * @param {string} messageContent
-     * @param {string} previewUrl=false
-     * @return {Promise<Object>} The response data from the Facebook Graph API, or null if an error occurs.
+     * @param {any} recipientPhoneNumber
+     * @param {any} messageId
+     * @param {any} messageContent
+     * @param {any} previewUrl=false
+     * @returns {Array}
      * @memberof Message
      */
-    static async sendReplyToTextMessage(recipientPhoneNumber, messageId, messageContent, previewUrl = false) {
+    async sendReplyToTextMessage(recipientPhoneNumber, messageId, messageContent, previewUrl = false) {
 
         const payload = {
             messaging_product: 'whatsapp',
@@ -92,13 +122,13 @@ class Message extends WACLOUDAPIBase {
 
     /**
      * Send Reaction Message to Message ID
-     * @param {string} recipientPhoneNumber
-     * @param {string} messageId
-     * @param {string} emoji
-     * @return {Promise<Object>} The response data from the Facebook Graph API, or null if an error occurs.
+     * @param {any} recipientPhoneNumber
+     * @param {any} messageId
+     * @param {any} emoji
+     * @returns {Array}
      * @memberof Message
      */
-    static async sendReactionMessage(recipientPhoneNumber, messageId, emoji) {
+    async sendReactionMessage(recipientPhoneNumber, messageId, emoji) {
         const url = `${this.baseUrl}`;
     
         const payload = {
@@ -123,13 +153,13 @@ class Message extends WACLOUDAPIBase {
 
     /**
      *  Send Image Message to WhatsApp Number by ID 
-     * @param {string} recipientPhoneNumber
-     * @param {string} imageUrl
-     * @param {string} caption=''
-     * @return {Promise<Object>} The response data from the Facebook Graph API, or null if an error occurs.
+     * @param {any} recipientPhoneNumber
+     * @param {any} imageUrl
+     * @param {any} caption=''
+     * @returns {Array}
      * @memberof Message
      */
-    static async sendImageMessageByID(recipientPhoneNumber, imageObjectId , caption = "") {
+    async sendImageMessageByID(recipientPhoneNumber, imageObjectId , caption = "") {
         const url = `${this.baseUrl}`;
     
         const payload = {
@@ -154,13 +184,13 @@ class Message extends WACLOUDAPIBase {
 
     /**
      * Send Image Message to WhatsApp Number by URL
-     * @param {string} recipientPhoneNumber
-     * @param {string} imageUrl
-     * @param {string} caption=""
-     * @return {Promise<Object>} The response data from the Facebook Graph API, or null if an error occurs.
+     * @param {any} recipientPhoneNumber
+     * @param {any} imageUrl
+     * @param {any} caption=""
+     * @returns {Array}
      * @memberof Message
      */
-    static async sendImageMessageByUrl(recipientPhoneNumber, imageUrl , caption = "") {
+    async sendImageMessageByUrl(recipientPhoneNumber, imageUrl , caption = "") {
         const url = `${this.baseUrl}`;
     
         const payload = {
@@ -186,13 +216,13 @@ class Message extends WACLOUDAPIBase {
 
     /**
      * Send Reply to Image Message by URL
-     * @param {string} recipientPhoneNumber
-     * @param {string} previousMessageId
-     * @param {string} imageUrl
-     * @return {Promise<Object>} The response data from the Facebook Graph API, or null if an error occurs.
+     * @param {any} recipientPhoneNumber
+     * @param {any} previousMessageId
+     * @param {any} imageUrl
+     * @returns {Array}
      * @memberof Message
      */
-    static async sendReplyToImageMessageByUrl(recipientPhoneNumber, previousMessageId, imageUrl) {
+    async sendReplyToImageMessageByUrl(recipientPhoneNumber, previousMessageId, imageUrl) {
         const url = `${this.baseUrl}`;
     
         const payload = {
@@ -220,12 +250,12 @@ class Message extends WACLOUDAPIBase {
 
     /**
      * Send Audio Message to WhatsApp Number by URL
-     * @param {string} recipientPhoneNumber
-     * @param {string} audioUrl
-     * @return {Promise<Object>} The response data from the Facebook Graph API, or null if an error occurs.
+     * @param {any} recipientPhoneNumber
+     * @param {any} audioUrl
+     * @returns {Array}
      * @memberof Message
      */
-    static async sendAudioMessageByUrl(recipientPhoneNumber, audioUrl) {
+    async sendAudioMessageByUrl(recipientPhoneNumber, audioUrl) {
         const url = `${this.baseUrl}`;
     
         const payload = {
@@ -250,13 +280,13 @@ class Message extends WACLOUDAPIBase {
 
     /**
      * Send Document   by URL
-     * @param {string} recipientPhoneNumber
-     * @param {string} documentUrl
-     * @param {string} caption
-     * @return {Promise<Object>} The response data from the Facebook Graph API, or null if an error occurs.
+     * @param {any} recipientPhoneNumber
+     * @param {any} documentUrl
+     * @param {any} caption
+     * @returns {array}
      * @memberof Message
      */
-    static async sendDocumentMessageByUrl(recipientPhoneNumber, documentUrl, caption) {
+    async sendDocumentMessageByUrl(recipientPhoneNumber, documentUrl, caption) {
         const url = `${this.baseUrl}`;
     
         const payload = {
@@ -281,16 +311,16 @@ class Message extends WACLOUDAPIBase {
 
     /**
      *  Send Message list to Recipent Number
-     * @param {string} recipientPhoneNumber (e.g. 447123456789)
-     * @param {string} headerText (e.g. 'Your order is on the way')
-     * @param {string} bodyText  (text to be displayed in the body of the list)
-     * @param {string} footerText (text to be displayed in the footer of the list)
-     * @param {string} buttonText (text to be displayed on the button)
-     * @param {string} sectionData (array of objects containing the list items)
-     * @return {Promise<Object>} The response data from the Facebook Graph API, or null if an error occurs.
+     * @param {any} recipientPhoneNumber (e.g. 447123456789)
+     * @param {any} headerText (e.g. 'Your order is on the way')
+     * @param {any} bodyText  (text to be displayed in the body of the list)
+     * @param {any} footerText (text to be displayed in the footer of the list)
+     * @param {any} buttonText (text to be displayed on the button)
+     * @param {any} sectionData (array of objects containing the list items)
+     * @returns {any}
      * @memberof Message
      */
-    static async  sendListMessage(recipientPhoneNumber, headerText, bodyText, footerText, buttonText, sectionData) {
+    async  sendListMessage(recipientPhoneNumber, headerText, bodyText, footerText, buttonText, sectionData) {
         const url = `${this.baseUrl}`;
         const payload = {
             messaging_product: 'whatsapp',
@@ -321,15 +351,15 @@ class Message extends WACLOUDAPIBase {
 
     /**
      * Sending product message to recipient number
-     * @param {string} recipientPhoneNumber (required)
-     * @param {string} catalogId (required)
-     * @param {string} productRetailerId (required)
-     * @param {string} bodyText='' (optional)
-     * @param {string} footerText='' (optional)
-     * @return {Promise<Object>} The response data from the Facebook Graph API, or null if an error occurs.
+     * @param {any} recipientPhoneNumber (required)
+     * @param {any} catalogId (required)
+     * @param {any} productRetailerId (required)
+     * @param {any} bodyText='' (optional)
+     * @param {any} footerText='' (optional)
+     * @returns {any}
      * @memberof Message
      */
-    static async  sendProductMessage(recipientPhoneNumber, catalogId, productRetailerId, bodyText = '', footerText = '') {
+    async  sendProductMessage(recipientPhoneNumber, catalogId, productRetailerId, bodyText = '', footerText = '') {
         const url = `${this.baseUrl}`;
         const payload = {
             messaging_product: 'whatsapp',
@@ -356,14 +386,14 @@ class Message extends WACLOUDAPIBase {
     
     /**
      * Send Template Message to WhatsApp Number
-     * @param {string} recipientPhoneNumber
-     * @param {string} templateName
-     * @param {string} languageCode
+     * @param {any} recipientPhoneNumber
+     * @param {any} templateName
+     * @param {any} languageCode
      * @param {array} components (Array of objects)
-     * @return {Promise<Object>} The response data from the Facebook Graph API, or null if an error occurs. return response
+     * @returns {any} return response
      * @memberof Message
      */
-    static async sendTemplateMessage(recipientPhoneNumber, templateName, languageCode, components) {
+    async sendTemplateMessage(recipientPhoneNumber, templateName, languageCode, components) {
         const url = `${this.baseUrl}`;
     
         const payload = {
@@ -391,15 +421,15 @@ class Message extends WACLOUDAPIBase {
     
     /**
      * Send Template Message to WhatsApp Number
-     * @param {string} recipientPhoneNumber (WhatsApp number)
-     * @param {string} templateName (Name of the template)
-     * @param {string} languageCode (ISO 639-1 language code)
-     * @param {string} imageUrl (URL of the image)
+     * @param {any} recipientPhoneNumber (WhatsApp number)
+     * @param {any} templateName (Name of the template)
+     * @param {any} languageCode (ISO 639-1 language code)
+     * @param {any} imageUrl (URL of the image)
      * @param {array} components (Array of objects)
-     * @return {Promise<Object>} The response data from the Facebook Graph API, or null if an error occurs. return response
+     * @returns {any} return response
      * @memberof Message
      */
-    static async sendTemplateMessageWithMedia(recipientPhoneNumber, templateName, languageCode, imageUrl, components) {
+    async sendTemplateMessageWithMedia(recipientPhoneNumber, templateName, languageCode, imageUrl, components) {
         const url = `${this.baseUrl}`;
     
         const payload = {
@@ -438,73 +468,29 @@ class Message extends WACLOUDAPIBase {
         }
     }
     
-    /**
-     * Send Interactive Template Message to WhatsApp Number
-     * @param {string} recipientPhoneNumber
-     * @param {string} templateName
-     * @param {string} languageCode
-     * @param {string} imageUrl
-     * @param {string} bodyParameters
-     * @param {string} quickReplyButtons
-     * @return {Promise<Object>} The response data from the Facebook Graph API, or null if an error occurs.
-     * @memberof Message
-     */
-    static async sendInteractiveTemplateMessage(recipientPhoneNumber, templateName, languageCode, imageUrl, bodyParameters, quickReplyButtons) {
-        const url = `${this.baseUrl}`;
-    
-        const payload = {
-            messaging_product: 'whatsapp',
-            recipient_type: 'individual',
-            to: recipientPhoneNumber,
-            type: 'template',
-            template: {
-                name: templateName,
-                language: {
-                    code: languageCode
-                },
-                components: [
-                    {
-                        type: 'header',
-                        parameters: [
-                            {
-                                type: 'image',
-                                image: {
-                                    link: imageUrl
-                                }
-                            }
-                        ]
-                    },
-                    {
-                        type: 'body',
-                        parameters: bodyParameters
-                    },
-                    ...quickReplyButtons.map((button, index) => {
-                        return {
-                            type: 'button',
-                            sub_type: 'quick_reply',
-                            index: index.toString(),
-                            parameters: [
-                                {
-                                    type: 'payload',
-                                    payload: button.payload
-                                }
-                            ]
-                        };
-                    })
-                ]
-            }
-        };
-    
-        try {
-            const response = await this.APIRequest(url, payload);
-            return response;
-        } catch (error) {
-            console.error('Error sending interactive template message:', error);
-            return null;
-        }
-    }
-    
 
 }
 
-module.exports = Message;
+module.exports = Message;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Message.html">Message</a></li><li><a href="NotificationParser.html">NotificationParser</a></li><li><a href="WebhookServer.html">WebhookServer</a></li><li><a href="WhatsAppWebhookParser.html">WhatsAppWebhookParser</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Apr 24 2023 23:08:03 GMT+0700 (Western Indonesia Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

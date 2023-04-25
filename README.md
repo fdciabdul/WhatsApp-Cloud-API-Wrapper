@@ -14,6 +14,8 @@
 
  This library is a Node.js wrapper for the Whatsapp Cloud API. It simplifies the process of interacting with the API by handling request and response formatting, authentication, and providing easy-to-use methods for common API operations.
 
+ (Give star if you like it :) 
+
 ## Features
 
 -   Easy to use and configure
