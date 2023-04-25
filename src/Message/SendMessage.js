@@ -1,5 +1,4 @@
 const axios = require('axios');
-const WACLOUDAPIBase = require('../Main');
 /**
  * Wrapper for Whatsapp Cloud API
  *  Source : https://www.postman.com/meta/workspace/whatsapp-business-platform/
@@ -10,11 +9,13 @@ const WACLOUDAPIBase = require('../Main');
  * @param {string} accessToken
  * @return {Promise<Object>} The response data from the Facebook Graph API, or null if an error occurs.
  */
-class Message extends WACLOUDAPIBase {
+class Message  {
     constructor(version, phoneNumberId, accessToken) {
-        super(version, phoneNumberId, accessToken);
+        this.version = version;
+        this.phoneNumberId = phoneNumberId;
+        this.accessToken = accessToken;
+        this.baseUrl = `https://graph.facebook.com/${version}/${phoneNumberId}/messages`;
     }
-
     /**
      *  Request Facebook API
      * @param {string} url - API URL
@@ -49,6 +50,7 @@ class Message extends WACLOUDAPIBase {
  * @memberof Message
  */
     async sendTextMessage(recipientPhoneNumber, messageContent, previewUrl = false) {
+     
         const payload = {
             messaging_product: 'whatsapp',
             recipient_type: 'individual',
