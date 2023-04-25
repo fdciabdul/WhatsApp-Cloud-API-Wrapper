@@ -22,7 +22,7 @@ class Message extends WACLOUDAPIBase {
      * @return {Promise<Object>} The response data from the Facebook Graph API, or null if an error occurs.
      * @memberof Message
      */
-    static async APIRequest(url, payload) {
+    async APIRequest(url, payload) {
 
         try {
             const response = await axios.post(url, payload, {
@@ -48,7 +48,7 @@ class Message extends WACLOUDAPIBase {
  * @returns {Promise<Object>} A promise that resolves to the API response.
  * @memberof Message
  */
-    static async sendTextMessage(recipientPhoneNumber, messageContent, previewUrl = false) {
+    async sendTextMessage(recipientPhoneNumber, messageContent, previewUrl = false) {
         const payload = {
             messaging_product: 'whatsapp',
             recipient_type: 'individual',
@@ -72,7 +72,7 @@ class Message extends WACLOUDAPIBase {
      * @return {Promise<Object>} The response data from the Facebook Graph API, or null if an error occurs.
      * @memberof Message
      */
-    static async sendReplyToTextMessage(recipientPhoneNumber, messageId, messageContent, previewUrl = false) {
+    async sendReplyToTextMessage(recipientPhoneNumber, messageId, messageContent, previewUrl = false) {
 
         const payload = {
             messaging_product: 'whatsapp',
@@ -98,7 +98,7 @@ class Message extends WACLOUDAPIBase {
      * @return {Promise<Object>} The response data from the Facebook Graph API, or null if an error occurs.
      * @memberof Message
      */
-    static async sendReactionMessage(recipientPhoneNumber, messageId, emoji) {
+    async sendReactionMessage(recipientPhoneNumber, messageId, emoji) {
         const url = `${this.baseUrl}`;
     
         const payload = {
@@ -129,7 +129,7 @@ class Message extends WACLOUDAPIBase {
      * @return {Promise<Object>} The response data from the Facebook Graph API, or null if an error occurs.
      * @memberof Message
      */
-    static async sendImageMessageByID(recipientPhoneNumber, imageObjectId , caption = "") {
+    async sendImageMessageByID(recipientPhoneNumber, imageObjectId , caption = "") {
         const url = `${this.baseUrl}`;
     
         const payload = {
@@ -160,7 +160,7 @@ class Message extends WACLOUDAPIBase {
      * @return {Promise<Object>} The response data from the Facebook Graph API, or null if an error occurs.
      * @memberof Message
      */
-    static async sendImageMessageByUrl(recipientPhoneNumber, imageUrl , caption = "") {
+    async sendImageMessageByUrl(recipientPhoneNumber, imageUrl , caption = "") {
         const url = `${this.baseUrl}`;
     
         const payload = {
@@ -192,7 +192,7 @@ class Message extends WACLOUDAPIBase {
      * @return {Promise<Object>} The response data from the Facebook Graph API, or null if an error occurs.
      * @memberof Message
      */
-    static async sendReplyToImageMessageByUrl(recipientPhoneNumber, previousMessageId, imageUrl) {
+    async sendReplyToImageMessageByUrl(recipientPhoneNumber, previousMessageId, imageUrl) {
         const url = `${this.baseUrl}`;
     
         const payload = {
@@ -225,7 +225,7 @@ class Message extends WACLOUDAPIBase {
      * @return {Promise<Object>} The response data from the Facebook Graph API, or null if an error occurs.
      * @memberof Message
      */
-    static async sendAudioMessageByUrl(recipientPhoneNumber, audioUrl) {
+    async sendAudioMessageByUrl(recipientPhoneNumber, audioUrl) {
         const url = `${this.baseUrl}`;
     
         const payload = {
@@ -256,7 +256,7 @@ class Message extends WACLOUDAPIBase {
      * @return {Promise<Object>} The response data from the Facebook Graph API, or null if an error occurs.
      * @memberof Message
      */
-    static async sendDocumentMessageByUrl(recipientPhoneNumber, documentUrl, caption) {
+    async sendDocumentMessageByUrl(recipientPhoneNumber, documentUrl, caption) {
         const url = `${this.baseUrl}`;
     
         const payload = {
@@ -290,7 +290,7 @@ class Message extends WACLOUDAPIBase {
      * @return {Promise<Object>} The response data from the Facebook Graph API, or null if an error occurs.
      * @memberof Message
      */
-    static async  sendListMessage(recipientPhoneNumber, headerText, bodyText, footerText, buttonText, sectionData) {
+    async  sendListMessage(recipientPhoneNumber, headerText, bodyText, footerText, buttonText, sectionData) {
         const url = `${this.baseUrl}`;
         const payload = {
             messaging_product: 'whatsapp',
@@ -329,7 +329,7 @@ class Message extends WACLOUDAPIBase {
      * @return {Promise<Object>} The response data from the Facebook Graph API, or null if an error occurs.
      * @memberof Message
      */
-    static async  sendProductMessage(recipientPhoneNumber, catalogId, productRetailerId, bodyText = '', footerText = '') {
+    async  sendProductMessage(recipientPhoneNumber, catalogId, productRetailerId, bodyText = '', footerText = '') {
         const url = `${this.baseUrl}`;
         const payload = {
             messaging_product: 'whatsapp',
@@ -363,7 +363,7 @@ class Message extends WACLOUDAPIBase {
      * @return {Promise<Object>} The response data from the Facebook Graph API, or null if an error occurs. return response
      * @memberof Message
      */
-    static async sendTemplateMessage(recipientPhoneNumber, templateName, languageCode, components) {
+    async sendTemplateMessage(recipientPhoneNumber, templateName, languageCode, components) {
         const url = `${this.baseUrl}`;
     
         const payload = {
@@ -399,7 +399,7 @@ class Message extends WACLOUDAPIBase {
      * @return {Promise<Object>} The response data from the Facebook Graph API, or null if an error occurs. return response
      * @memberof Message
      */
-    static async sendTemplateMessageWithMedia(recipientPhoneNumber, templateName, languageCode, imageUrl, components) {
+    async sendTemplateMessageWithMedia(recipientPhoneNumber, templateName, languageCode, imageUrl, components) {
         const url = `${this.baseUrl}`;
     
         const payload = {
@@ -449,7 +449,7 @@ class Message extends WACLOUDAPIBase {
      * @return {Promise<Object>} The response data from the Facebook Graph API, or null if an error occurs.
      * @memberof Message
      */
-    static async sendInteractiveTemplateMessage(recipientPhoneNumber, templateName, languageCode, imageUrl, bodyParameters, quickReplyButtons) {
+    async sendInteractiveTemplateMessage(recipientPhoneNumber, templateName, languageCode, imageUrl, bodyParameters, quickReplyButtons) {
         const url = `${this.baseUrl}`;
     
         const payload = {

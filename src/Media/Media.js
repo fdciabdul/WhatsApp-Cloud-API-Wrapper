@@ -111,6 +111,20 @@ class Media {
     }
 }
 
+async retrieveMediaUrl(mediaId) {
+    const url = `https://graph.facebook.com/${this.version}/${mediaId}?phone_number_id=${this.phoneNumberId}`;
+    const headers = {
+        'Authorization': `Bearer ${this.accessToken}`,
+    };
+
+    try {
+        const response = await axios.get(url, { headers });
+        return response.data;
+    } catch (error) {
+        console.error("Error retrieving media URL:", error);
+        return null;
+    }
+}
 /**
  * Convert an image to webp format.
  * @param {string} inputFilePath - The local file path of the image to be converted.
@@ -129,3 +143,5 @@ async convertToWebp(inputFilePath) {
 }
 
 }
+
+module.exports = Media;
