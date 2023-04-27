@@ -16,38 +16,42 @@ class WhatsAppWebhookParser {
          */
         getMessage() {
                 if (
-                        this.webhookData.object === 'whatsapp_business_account' &&
-                        this.webhookData.entry
+                  this.webhookData.object === 'whatsapp_business_account' &&
+                  this.webhookData.entry
                 ) {
-                        const entry = this.webhookData.entry[0];
-    
-                        if (entry.changes) {
-                                const change = entry.changes[0];
-                                const value = change.value;
-    
-                                if (
-                                        value.messaging_product === 'whatsapp' &&
-                                        value.messages &&
-                                        value.messages[0].type === 'text'
-                                ) {
-                                        const SetType = entry.changes[0].value.messages[0];
-    
-                                        return {
-                                                type: 'text',
-                                                from: value.messages[0].from,
-                                                text: value.messages[0].text.body,
-                                                timestamp: value.messages[0].timestamp,
-                                                senderName: value.contacts[0].profile.name,
-                                                wa_id: value.messages[0].id,
-                                                forwarded: SetType.context && SetType.context.forwarded ? true : false,
-                                                quoted: SetType.context ? SetType.context : false,
-                                        };
-                                }
-                        }
+                  const entry = this.webhookData.entry[0];
+                  let forward;
+              
+                  if (entry.changes) {
+                    const change = entry.changes[0];
+                    const value = change.value;
+              
+                    if (
+                      value.messaging_product === 'whatsapp' &&
+                      value.messages &&
+                      value.messages[0].type === 'text'
+                    ) {
+                      const SetType = entry.changes[0].value.messages[0];
+                      if (SetType.context && SetType.context.forwarded !== undefined) {
+                        forward = SetType.context.forwarded;
+                      }
+                      return {
+                        type: 'text',
+                        from: value.messages[0].from,
+                        text: value.messages[0].text.body,
+                        timestamp: value.messages[0].timestamp,
+                        senderName: value.contacts[0].profile.name,
+                        wa_id: value.messages[0].id,
+                        forwarded: SetType.context && SetType.context.forwarded ? true : false,
+                        quoted: SetType.context && SetType.context.forwarded ? false : SetType.context ? SetType.context : false,
+                      };
+                    }
+                  }
                 }
-    
+              
                 return null;
-        }
+              }
+              
     
         /**
          * Get Type of text Message with Security Notification
