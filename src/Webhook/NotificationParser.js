@@ -15,13 +15,27 @@ class NotificationParser {
      * @memberof NotificationParser
      */
     getMessageStatusUpdate() {
+       
+        if (
+            this.notificationData &&
+            this.notificationData.entry &&
+            this.notificationData.entry[0] &&
+            this.notificationData.entry[0].changes &&
+            this.notificationData.entry[0].changes[0] &&
+            this.notificationData.entry[0].changes[0].value &&
+            this.notificationData.entry[0].changes[0].value.statuses &&
+            this.notificationData.entry[0].changes[0].value.statuses[0]
+        ) {
             const status = this.notificationData.entry[0].changes[0].value.statuses[0];
             return {
-                    id: status.id,
-                    status: status.status,
-                    timestamp: status.timestamp,
-                    recipient_id: status.recipient_id,
+                id: status.id,
+                status: status.status,
+                timestamp: status.timestamp,
+                recipient_id: status.recipient_id,
             };
+        }
+        
+        return {};
     }
 
     /**
