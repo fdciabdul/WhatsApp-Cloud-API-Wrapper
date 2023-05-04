@@ -5,7 +5,7 @@
   <br>
  
 
-  <a href="https://imtaqin.id"> <img src="assets/logo.png" height="400"></a>
+  <a href="https://imtaqin.id"> <img src="assets/logo.png" width="300"></a>
   
 # Whatsapp Cloud API Wrapper
 [![License: GPL-3.0 license](https://img.shields.io/github/license/fdciabdul/WhatsApp-Cloud-API-Wrapper?style=plastic)](https://opensource.org/licenses/Artistic-2.0)
