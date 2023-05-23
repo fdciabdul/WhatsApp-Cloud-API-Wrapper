@@ -1,7 +1,9 @@
 const express = require('express');
 const ngrok = require('ngrok');
 const EventEmitter = require('events');
-
+const Banner = require('../../utils/Banner');
+const WaSpinner =require('../../utils/Spinner')
+const spinner = new WaSpinner();
 /**
  *  Class WebhookServer
  * @param {any} port (required)
@@ -18,7 +20,6 @@ class WebhookServer extends EventEmitter {
         this.ngrokAuthToken = opts.ngrokAuthToken;
         this.app = express();
         this.server = null;
-
         if (this.useNgrok && !this.ngrokAuthToken) {
             return 'ngrok authtoken is required when ngrok is enabled.';
         }
@@ -31,15 +32,19 @@ class WebhookServer extends EventEmitter {
      */
     async start() {
         this.app.use(express.json()); // Add this line to use the JSON middleware
-
+        process.stdout.write("\u001b[1;32m"+Banner.SHOW+"\u001b[0m")
         this.server = this.app.listen(this.port, () => {
-            console.log(`Webhook server listening on port ${this.port}`);
+           spinner.add('listener', {text:`Webhook server listening on port [${this.port}]`,color:"yellow"});
         });
 
         if (this.useNgrok) {
+            try {
             await ngrok.authtoken(this.ngrokAuthToken);
             const url = await ngrok.connect(this.port);
-            console.log(`Ngrok tunnel opened at ${url}`);
+            spinner.add('ngrok', {text:`Ngrok tunnel opened at ${url}`,color:"greenBright"});
+        } catch (error) {  
+            spinner.add('ngrok', {text:`Ngrok tunnel Failed , Check your Auth token!`,color:"red"});
+        }
         }
 
         this.app.post('/webhook', (req, res) => {
@@ -81,13 +86,14 @@ class WebhookServer extends EventEmitter {
     stop() {
         if (this.server) {
             this.server.close(() => {
-                console.log('Webhook server stopped');
+                spinner.fail('listener', {text:`Webhook server stopped`,color:"red"});
             });
         }
         if (this.useNgrok) {
             ngrok.disconnect();
-            console.log('Ngrok tunnel closed');
+            spinner.add('ngrok', {text:`Ngrok tunnel closed`,color:"red"});
         }
+        
     }
 }
 

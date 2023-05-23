@@ -1,6 +1,8 @@
 const axios = require('axios');
 const fs = require('fs');
 const FormData = require('form-data');
+const WaSpinner =require('../../utils/Spinner')
+const spinner = new WaSpinner();
 let sharpAvailable = false;
 let sharp;
 
@@ -8,7 +10,7 @@ try {
     sharp = require('sharp');
     sharpAvailable = true;
 } catch (err) {
-    console.warn("Warning: sharp module is not installed. Please install the sharp module (npm install sharp) to use the uploadSticker function.");
+   // spinner.add('warn', {text:"Since i dont wanna use sharp module , if you wanna use sticker function you should install it manually (npm install sharp).",color:"red"});
 }
 /**
  * Media class to handle media-related actions using Facebook Graph API.
