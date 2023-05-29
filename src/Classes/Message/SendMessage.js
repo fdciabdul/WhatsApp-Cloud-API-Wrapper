@@ -505,7 +505,33 @@ class Message  {
             return null;
         }
     }
-    
+    /**
+     * Mark Message As Read
+     * @param {string} recipientPhoneNumber
+     * @param {string} wa_id
+     * @return {Promise<Object>} The response data from the Facebook Graph API, or null if an error occurs.
+     * @memberof Message
+     */
+    async MarkMessageAsRead(wa_id){
+        try {
+            let payload = {
+                messaging_product: "whatsapp",
+                status: "read",
+                message_id: wa_id
+            }
+            const response = await axios.put(url, payload, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${this.accessToken}`,
+                },
+            });
+
+            return response.data;
+        } catch (error) {
+   
+            return error?.response?.data;
+        }
+    }
 
 }
 
