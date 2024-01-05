@@ -1,8 +1,6 @@
 const axios = require('axios');
 const fs = require('fs');
 const FormData = require('form-data');
-const WaSpinner =require('../../utils/Spinner')
-const spinner = new WaSpinner();
 let sharpAvailable = false;
 let sharp;
 
@@ -10,7 +8,7 @@ try {
     sharp = require('sharp');
     sharpAvailable = true;
 } catch (err) {
-   // spinner.add('warn', {text:"Since i dont wanna use sharp module , if you wanna use sticker function you should install it manually (npm install sharp).",color:"red"});
+   
 }
 /**
  * Media class to handle media-related actions using Facebook Graph API.
@@ -55,9 +53,12 @@ class Media {
 
         try {
             const response = await axios(config);
+            // Use console.log with formatted data
+            console.log('\x1b[32m%s\x1b[0m', 'Image uploaded successfully:', response.data);
             return response.data;
         } catch (error) {
-            console.error('Error in API request:', error);
+            // Use console.error for errors
+            console.error('\x1b[31m%s\x1b[0m', 'Error in API request:', error);
             return null;
         }
     }
@@ -67,7 +68,7 @@ class Media {
  * @param {string} filePath - The local file path of the sticker to be uploaded.
  * @return {Promise<Object>} The response data from the Facebook Graph API, or null if an error occurs.
  */
-    async uploadSticker(filePath) {
+ async uploadSticker(filePath) {
         if (!sharpAvailable) {
             console.error("Error: sharp module is not installed. Please install the sharp module (npm install sharp) to use the uploadSticker function.");
             return null;
