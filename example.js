@@ -1,15 +1,15 @@
 const { Message, WAParser, WebhookServer } = require('./');
 
 // Replace these values with your own credentials
-const apiVersion = 'v16.0';
-const phoneNumberId = '180841101787667';
-const accessToken = 'EAALIUS8A2nsBO0H28Jgem4YVBgXZC59C3lyZCCO6mVE2AmZCuzNrp1ezmrV0nAKrY4JYJrvygYAHxlUmIPCvWISj0F8VwxsRjQiSMxLKgWTzU0AqPIQc9aCOeAaXnxlOm9guZCU2vhUb5xUpZCMdZAoYD8dOLtKZAKOweQh468Gmsi75DxksnhUbjUJdxX4U6r60STrudlTVZBr2RnC5gecZD';
+const apiVersion = 'YOUR_API_VERSION';
+const phoneNumberId = 'YOUR_PHONE_NUMBER_ID';
+const accessToken = 'YOUR_ACCESS_TOKEN';
 
 // Create a Message instance
 const message = new Message(apiVersion, phoneNumberId, accessToken);
 
 // Send a text message
-const recipientPhoneNumber = '6285162772731';
+const recipientPhoneNumber = 'RECIPIENT_PHONE_NUMBER';
 const messageContent = 'Hello from Whatsapp Cloud API Wrapper!';
 
 // Create a WebhookServer instance
@@ -23,7 +23,7 @@ const webhookServer = new WebhookServer(port, useNgrok, {
 
 // Add a listener for incoming messages
 webhookServer.on('message', (data) => {
-  console.log('Received message:', data);
+  console.log('Received message:', message);
   const parse = new WAParser(data);
   // parse message
   const parsedMessage = parse.parseMessage();
@@ -32,7 +32,7 @@ webhookServer.on('message', (data) => {
 
 // Add a route for webhook verification
 const callbackUrl = '/webhook';
-const verificationToken = 'sa';
+const verificationToken = 'YOUR_VERIFICATION_TOKEN';
 webhookServer.Verification(callbackUrl, verificationToken);
 
 // Start the webhook server
