@@ -12,7 +12,7 @@
     "jsdoc": "^4.0.2"
   },
   "name": "wacloudapi",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "main": "index.js",
   "scripts": {
     "docs": "jsdoc -c jsdoc.json",
